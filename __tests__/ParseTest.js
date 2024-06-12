@@ -32,7 +32,7 @@ test('End to end from form to JSON', () => {
   `;
 
     const form = document.getElementById('testForm');
-    const formData = fjson.getFormData(form);
+    const formData = fjson.formDataToList(form);
 
     expect(formData).toEqual({
         'name': 'testname',
@@ -55,7 +55,7 @@ test('End to end from form to JSON', () => {
         'owner.settings[1].value': 'value2'
     });
 
-    const json = fjson.convertToJson(formData);
+    const json = fjson.convertToObjectHierarchy(formData);
 
     expect(json.name).toEqual('testname');
     expect(json.address.street).toEqual('test street');

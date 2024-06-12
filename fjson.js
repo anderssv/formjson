@@ -1,4 +1,4 @@
-function convertToJson(data) {
+function convertToObjectHierarchy(data) {
     const result = {};
 
     for (const key in data) {
@@ -21,7 +21,7 @@ function convertToJson(data) {
     return result;
 }
 
-function getFormData(form) {
+function formDataToList(form) {
     const formData = new FormData(form);
     const data = {};
 
@@ -41,6 +41,6 @@ function getFormData(form) {
 }
 
 module.exports = {
-    getFormData: getFormData,
-    convertToJson: convertToJson,
+    formDataToList: formDataToList,
+    convertToObjectHierarchy: convertToObjectHierarchy,
 };
