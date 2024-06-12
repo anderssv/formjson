@@ -75,3 +75,19 @@ test('End to end from form to JSON', () => {
     expect(json.owner.settings[1].value).toEqual('value2');
     expect(json.multipleChoice).toEqual(['choice1', 'choice2']);
 });
+
+test('Direct method test', () => {
+    document.body.innerHTML = `
+    <form id="testForm">
+        <input type="text" name="address.street" value="test street">
+        <input type="text" name="address.city" value="test city">
+    </form>
+  `;
+
+    const form = document.getElementById('testForm');
+    const json = fjson.form_to_object(form);
+
+    expect(json.address.street).toEqual('test street');
+    expect(json.address.city).toEqual('test city');
+
+});

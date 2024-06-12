@@ -40,7 +40,12 @@ function formDataToList(form) {
     return data;
 }
 
+function form_to_object(form) {
+    return convertToObjectHierarchy(formDataToList(form));
+}
+
 module.exports = {
     formDataToList: formDataToList,
     convertToObjectHierarchy: convertToObjectHierarchy,
+    form_to_object: form_to_object,
 };
