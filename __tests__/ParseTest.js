@@ -24,9 +24,10 @@ test('End to end from form to JSON', () => {
         <input type="text" name="administrators[2].name" value="admin3">
         <input type="email" name="administrators[2].email" value="admin3@example.com">
         <input type="text" name="owner.settings[0].name" value="setting1">
+        <input type="text" name="owner.settings[0].value__existing" value="value1existing">
         <input type="text" name="owner.settings[0].value" value="value1">
         <input type="text" name="owner.settings[1].name" value="setting2">
-        <input type="text" name="owner.settings[1].value" value="value2">
+        <input type="text" name="owner.settings[1].value__existing" value="value2">
         <button type="submit">Submit</button>
     </form>
   `;
@@ -89,5 +90,4 @@ test('Direct method test', () => {
 
     expect(json.address.street).toEqual('test street');
     expect(json.address.city).toEqual('test city');
-
 });

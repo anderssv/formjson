@@ -23,21 +23,18 @@ function convertToObjectHierarchy(data) {
 
 function formDataToList(form) {
     const formData = new FormData(form);
-    const data = {};
+    const formDataObj = {};
 
     formData.forEach((value, key) => {
-        if (data[key]) {
-            if (Array.isArray(data[key])) {
-                data[key].push(value);
-            } else {
-                data[key] = [data[key], value];
-            }
-        } else {
-            data[key] = value;
+        // Handling __existing suffix
+        const realKey = key.endsWith('__existing') ? key.replace('__existing', '') : key;
+        // If real key is not in formDataObj without __existing suffix, assign value
+        if (!formDataObj.hasOwnProperty(realKey) || !key.endsWith('__existing')) {
+            formDataObj[realKey] = value;
         }
     });
 
-    return data;
+    return formDataObj;
 }
 
 function form_to_object(form) {
