@@ -1,3 +1,51 @@
+async function formListener(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const form = event.target;
+    const formAsObject = form_to_object(form);
+
+    const response = await fetch(form.action, {
+        method: form.method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formAsObject), // Send the JSON data
+        redirect: 'manual' // Prevent automatic following of redirects
+    });
+
+    if (response.type === 'opaqueredirect') {
+        // Handle opaque redirects (e.g., CORS issues)
+        // Not really sure what to do here?
+        console.error('Opaque redirect response');
+        return;
+    }
+
+    if (response.status >= 300 && response.status < 400) {
+        // If the response is a redirect
+        const redirectUrl = response.headers.get('Location');
+        if (redirectUrl) {
+            window.location.href = redirectUrl; // Follow the redirect
+            return;
+        }
+    }
+
+    if (response.ok) {
+        const html = await response.text(); // Get the HTML response as text
+        const newUrl = response.url; // Get the new URL from the response
+
+        // Update the current document's content with the new HTML
+        document.open();
+        document.write(html);
+        document.close();
+
+        // Update the URL in the browser
+        //history.pushState(null, '', newUrl);
+    } else {
+        console.error('Form submission failed');
+        // Handle the error response as needed
+    }
+}
+
 function convertToObjectHierarchy(data) {
     const result = {};
 
@@ -40,6 +88,16 @@ function formDataToList(form) {
 function form_to_object(form) {
     return convertToObjectHierarchy(formDataToList(form));
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all forms with the 'fjson' attribute
+    const forms = document.querySelectorAll('form[fjson]');
+
+    // Add an event listener for 'submit' to each form
+    forms.forEach(form => {
+        form.addEventListener('submit', formListener);
+    });
+});
 
 module.exports = {
     formDataToList: formDataToList,
