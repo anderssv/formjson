@@ -10,24 +10,7 @@ async function formListener(event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(formAsObject), // Send the JSON data
-        redirect: 'manual' // Prevent automatic following of redirects
     });
-
-    if (response.type === 'opaqueredirect') {
-        // Handle opaque redirects (e.g., CORS issues)
-        // Not really sure what to do here?
-        console.error('Opaque redirect response');
-        return;
-    }
-
-    if (response.status >= 300 && response.status < 400) {
-        // If the response is a redirect
-        const redirectUrl = response.headers.get('Location');
-        if (redirectUrl) {
-            window.location.href = redirectUrl; // Follow the redirect
-            return;
-        }
-    }
 
     if (response.ok) {
         const html = await response.text(); // Get the HTML response as text
@@ -39,7 +22,7 @@ async function formListener(event) {
         document.close();
 
         // Update the URL in the browser
-        //history.pushState(null, '', newUrl);
+        history.pushState(null, '', newUrl);
     } else {
         console.error('Form submission failed');
         // Handle the error response as needed
