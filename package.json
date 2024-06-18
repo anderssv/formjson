@@ -1,14 +1,14 @@
 {
   "name": "formjson",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.0",
+  "main": "formjson.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": ["form", "json", "formjson", "html"],
+  "author": "Anders Sveen <anders@f12.no>",
+  "license": "Apache-2.0",
+  "description": "Simple form library to convert form data to JSON and send as a hidden input",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",
     "express": "^4.19.2",
