@@ -4,7 +4,7 @@
 
 'use strict';
 
-const fjson = require('../fjson.js');
+const formjson = require('../formjson.js');
 
 test('End to end from form to JSON', () => {
     document.body.innerHTML = `
@@ -33,7 +33,7 @@ test('End to end from form to JSON', () => {
   `;
 
     const form = document.getElementById('testForm');
-    const formData = fjson.formDataToList(form);
+    const formData = formjson.formDataToList(form);
 
     expect(formData).toEqual({
         'name': 'testname',
@@ -56,7 +56,7 @@ test('End to end from form to JSON', () => {
         'owner.settings[1].value': 'value2'
     });
 
-    const json = fjson.convertToObjectHierarchy(formData);
+    const json = formjson.convertToObjectHierarchy(formData);
 
     expect(json.name).toEqual('testname');
     expect(json.address.street).toEqual('test street');
@@ -86,7 +86,7 @@ test('Direct method test', () => {
   `;
 
     const form = document.getElementById('testForm');
-    const json = fjson.form_to_object(form);
+    const json = formjson.form_to_object(form);
 
     expect(json.address.street).toEqual('test street');
     expect(json.address.city).toEqual('test city');

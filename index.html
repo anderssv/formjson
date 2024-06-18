@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intercept Form Submit</title>
-    <script src="fjson.js"></script>
+    <script src="formjson.js"></script>
 </head>
 <body>
 <h1>Normal Form Submit</h1>
-<form id="myForm" action="/response" method="post" fjson>
+<form id="myForm" action="/response" method="post" formjson>
     <input type="text" name="user.name" required>
     <input type="password" name="user.password" required>
     <input type="hidden" name="user.address.street" value="123 Main St">
@@ -19,7 +19,7 @@
 </form>
 
 <h1>Redirect Form Submit</h1>
-<form id="myForm2" action="http://localhost:3000/redirect" method="post" fjson>
+<form id="myForm2" action="http://localhost:3000/redirect" method="post" formjson>
     <input type="text" name="user.name" required>
     <input type="password" name="user.password" required>
     <input type="hidden" name="user.address.street" value="123 Main St">

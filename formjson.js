@@ -2,13 +2,13 @@ async function formListener(event) {
     const form = event.target;
     const formAsObject = form_to_object(form);
 
-    if (form.querySelector(`input[name='_fjson']`)) {
-        throw new Error('Form already has a hidden input with the name _fjson');
+    if (form.querySelector(`input[name='_formjson']`)) {
+        throw new Error('Form already has a hidden input with the name _formjson');
     }
 
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'hidden';
-    hiddenInput.name = '_fjson';
+    hiddenInput.name = '_formjson';
     hiddenInput.value = JSON.stringify(formAsObject);
     form.appendChild(hiddenInput);
 }
@@ -58,8 +58,8 @@ function form_to_object(form) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all forms with the 'fjson' attribute
-    const forms = document.querySelectorAll('form[fjson]');
+    // Select all forms with the 'formjson' attribute
+    const forms = document.querySelectorAll('form[formjson]');
 
     // Add an event listener for 'submit' to each form
     forms.forEach(form => {
