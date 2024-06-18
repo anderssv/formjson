@@ -10,8 +10,6 @@ Important elements:
 - Handles existing values (can be hidden inputs) by using a __existing suffix. Value will be resolved before sending to
   back end.
 
-Gotchas:
-
-- When intercepting the actual form submission you break some of the semantics of HTML (like a reload of a post
-  re-submitting the form). We currently work around this by making sure a successful submit does a redirect to the next
-  stage. This is probably a good idea for many other reasons as well.
+# Props
+- Thanks to [Cies Breijs](https://github.com/cies) for initial discussions that lead to this idea.
+- Thanks to Sindre Andre Jacobsen for ideas on how to handle form submission with a hidden field.

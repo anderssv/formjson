@@ -1,36 +1,33 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve static files from the current directory
 app.use(express.static(path.join(__dirname)));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-    console.log('--- REQUEST ---');
-    res.header('Access-Control-Allow-Origin', '*'); // Adjust the origin as needed
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Expose-Headers', 'Location'); // Expose the Location header
-    next();
-});
+function responseHtml(title, formData) {
+    return `<html><body><h1>${title}</h1><p>Form data JSON: <code>${formData}</code></p></body></html>`;
+}
 
 app.post('/response', (req, res) => {
     console.log('--- POST ---');
-    console.log(req.body);
-    res.send('<html><body><h1>Hello World from server!!!</h1></body></html>');
+    console.log(req.body._fjson);
+    res.send(responseHtml('Hello World from server', req.body._fjson));
 });
 
 app.post('/redirect', (req, res) => {
     console.log('--- POST ---');
-    console.log(req.body);
-    res.redirect('/redirect2');
+    console.log(req.body._fjson);
+    res.redirect('/redirect-result');
 });
 
-app.get('/redirect2', (req, res) => {
+app.get('/redirect-result', (req, res) => {
     console.log('--- GET ---');
-    console.log(req.query);
-    res.send('<html><body><h1>Hello World from server after redirect!!!</h1></body></html>');
+    res.send(responseHtml('Redirected to /redirect-result', 'GET so no form data'));
 });
 
 app.listen(PORT, () => {

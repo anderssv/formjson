@@ -1,6 +1,5 @@
-async function formListener(event) {
+async function performSubmissionWithFetch(event) {
     event.preventDefault(); // Prevent the default form submission
-
     const form = event.target;
     const formAsObject = form_to_object(form);
 
@@ -16,17 +15,34 @@ async function formListener(event) {
         const html = await response.text(); // Get the HTML response as text
         const newUrl = response.url; // Get the new URL from the response
 
-        // Update the current document's content with the new HTML
-        document.open();
-        document.write(html);
-        document.close();
+        // Parse the response HTML using a DOMParser
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
 
-        // Update the URL in the browser
-        history.pushState(null, '', newUrl);
+        // Replace the entire body content with the new content
+        document.body.innerHTML = doc.body.innerHTML;
+
+        // Update the URL in the browser without breaking the back functionality
+        history.pushState({html: html, url: newUrl}, '', newUrl);
     } else {
         console.error('Form submission failed');
         // Handle the error response as needed
     }
+}
+
+async function formListener(event) {
+    const form = event.target;
+    const formAsObject = form_to_object(form);
+
+    if (form.querySelector(`input[name='_fjson']`)) {
+        throw new Error('Form already has a hidden input with the name _fjson');
+    }
+
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = '_fjson';
+    hiddenInput.value = JSON.stringify(formAsObject);
+    form.appendChild(hiddenInput);
 }
 
 function convertToObjectHierarchy(data) {
@@ -71,6 +87,7 @@ function formDataToList(form) {
 function form_to_object(form) {
     return convertToObjectHierarchy(formDataToList(form));
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Select all forms with the 'fjson' attribute

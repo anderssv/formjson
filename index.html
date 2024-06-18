@@ -9,15 +9,23 @@
 <body>
 <h1>Normal Form Submit</h1>
 <form id="myForm" action="/response" method="post" fjson>
-    <input type="text" name="username" required>
-    <input type="password" name="password" required>
+    <input type="text" name="user.name" required>
+    <input type="password" name="user.password" required>
+    <input type="hidden" name="user.address.street" value="123 Main St">
+    <input type="hidden" name="user.address.city" value="Anytown">
+    <input type="hidden" name="user.address.state" value="CA">
+    <input type="hidden" name="user.address.zip" value="12345">
     <button type="submit">Submit</button>
 </form>
 
 <h1>Redirect Form Submit</h1>
 <form id="myForm2" action="http://localhost:3000/redirect" method="post" fjson>
-    <input type="text" name="username" required>
-    <input type="password" name="password" required>
+    <input type="text" name="user.name" required>
+    <input type="password" name="user.password" required>
+    <input type="hidden" name="user.address.street" value="123 Main St">
+    <input type="hidden" name="user.address.city" value="Anytown">
+    <input type="hidden" name="user.address.state" value="CA">
+    <input type="hidden" name="user.address.zip" value="12345">
     <button type="submit">Submit</button>
 </form>
 
