@@ -51,3 +51,8 @@ Important elements:
 # Props
 - Thanks to [Cies Breijs](https://github.com/cies) for initial discussions that lead to this idea.
 - Thanks to Sindre Andre Jacobsen for ideas on how to handle form submission with a hidden field.
+
+# Testing
+There is a simple test suite. Run it with ```npm test```.
+
+A simple test page is included in the repo. Yoy can run a test server with ```node server-test.js```.
