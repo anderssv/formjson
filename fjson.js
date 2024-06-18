@@ -1,35 +1,3 @@
-async function performSubmissionWithFetch(event) {
-    event.preventDefault(); // Prevent the default form submission
-    const form = event.target;
-    const formAsObject = form_to_object(form);
-
-    const response = await fetch(form.action, {
-        method: form.method,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formAsObject), // Send the JSON data
-    });
-
-    if (response.ok) {
-        const html = await response.text(); // Get the HTML response as text
-        const newUrl = response.url; // Get the new URL from the response
-
-        // Parse the response HTML using a DOMParser
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-
-        // Replace the entire body content with the new content
-        document.body.innerHTML = doc.body.innerHTML;
-
-        // Update the URL in the browser without breaking the back functionality
-        history.pushState({html: html, url: newUrl}, '', newUrl);
-    } else {
-        console.error('Form submission failed');
-        // Handle the error response as needed
-    }
-}
-
 async function formListener(event) {
     const form = event.target;
     const formAsObject = form_to_object(form);
