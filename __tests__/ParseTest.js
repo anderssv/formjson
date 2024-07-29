@@ -4,7 +4,7 @@
 
 'use strict';
 
-const formjson = require('../formjson.js');
+const formjson = require('../src/formjson.js');
 
 test('End to end from form to JSON', () => {
     document.body.innerHTML = `

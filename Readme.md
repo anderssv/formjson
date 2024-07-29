@@ -4,9 +4,11 @@ Simple client side script to handle form submissions with JSON. It adds a hidden
 # Usage
 
 Import the script into your page:
+
 ```html
+
 <head>
-    <script src="formjson.js"></script>
+  <script src="src/formjson.js"></script>
 </head>
 ```
 
