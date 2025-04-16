@@ -15,13 +15,13 @@ function responseHtml(title, formData) {
 
 app.post('/response', (req, res) => {
     console.log('--- POST ---');
-    console.log(req.body._formjson);
-    res.send(responseHtml('Hello World from server', req.body._formjson));
+    console.log(req.body.__formjson);
+    res.send(responseHtml('Hello World from server', req.body.__formjson));
 });
 
 app.post('/redirect', (req, res) => {
     console.log('--- POST ---');
-    console.log(req.body._formjson);
+    console.log(req.body.__formjson);
     res.redirect('/redirect-result');
 });
 

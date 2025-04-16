@@ -15,8 +15,8 @@
   "license": "Apache-2.0",
   "description": "Simple form library to convert form data to JSON and send as a hidden input",
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.4.6",
-    "express": "^4.19.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "express": "^5.1.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
   },

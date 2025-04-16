@@ -2,13 +2,9 @@ async function formListener(event) {
     const form = event.target;
     const formAsObject = form_to_object(form);
 
-    if (form.querySelector(`input[name='_formjson']`)) {
-        throw new Error('Form already has a hidden input with the name _formjson');
-    }
-
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'hidden';
-    hiddenInput.name = '_formjson';
+    hiddenInput.name = '__formjson';
     hiddenInput.value = JSON.stringify(formAsObject);
     form.appendChild(hiddenInput);
 }

@@ -1,5 +1,5 @@
 Simple client side script to handle form submissions with JSON. It adds a hidden input to the form with the name
-'_formjson' and a value of the JSON representation of the form.
+'__formjson' and a value of the JSON representation of the form.
 
 # Usage
 
@@ -23,7 +23,7 @@ Mark your form with the formjson attribute:
 </form>
 ```
 
-The formjson attribute will add a hidden input to the form with the name '_formjson' and a value of the JSON representation of the form.
+The formjson attribute will add a hidden input to the form with the name '__formjson' and a value of the JSON representation of the form.
 
 Example JSON:
 ```json
