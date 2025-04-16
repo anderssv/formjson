@@ -46,11 +46,13 @@ function formDataToList(form) {
     const formDataObj = {};
 
     formData.forEach((value, key) => {
-        // Handling __existing suffix
-        const realKey = key.endsWith('__existing') ? key.replace('__existing', '') : key;
-        // If real key is not in formDataObj without __existing suffix, assign value
-        if (!formDataObj.hasOwnProperty(realKey) || !key.endsWith('__existing')) {
-            formDataObj[realKey] = value;
+        if (key !== '__formjson') { // Skip if there from previous submit (back handling)
+            // Handling __existing suffix
+            const realKey = key.endsWith('__existing') ? key.replace('__existing', '') : key;
+            // If real key is not in formDataObj without __existing suffix, assign value
+            if (!formDataObj.hasOwnProperty(realKey) || !key.endsWith('__existing')) {
+                formDataObj[realKey] = value;
+            }
         }
     });
 

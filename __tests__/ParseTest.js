@@ -28,6 +28,7 @@ test('End to end from form to JSON', () => {
         <input type="text" name="owner.settings[0].value" value="value1">
         <input type="text" name="owner.settings[1].name" value="setting2">
         <input type="text" name="owner.settings[1].value__existing" value="value2">
+        <input type="hidden" name="__formjson" value="{}">
         <button type="submit">Submit</button>
     </form>
   `;
