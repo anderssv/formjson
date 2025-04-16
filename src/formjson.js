@@ -1,12 +1,21 @@
 async function formListener(event) {
     const form = event.target;
+    // Use the shared function to update the __formjson field
     const formAsObject = form_to_object(form);
 
-    const hiddenInput = document.createElement('input');
-    hiddenInput.type = 'hidden';
-    hiddenInput.name = '__formjson';
+    // Check if __formjson input already exists
+    let hiddenInput = form.querySelector('input[name="__formjson"]');
+
+    if (!hiddenInput) {
+        // Create new hidden input if it doesn't exist
+        hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = '__formjson';
+        form.appendChild(hiddenInput);
+    }
+
+    // Update the value
     hiddenInput.value = JSON.stringify(formAsObject);
-    form.appendChild(hiddenInput);
 }
 
 function convertToObjectHierarchy(data) {
@@ -53,12 +62,14 @@ function form_to_object(form) {
 }
 
 
+// Function to update the __formjson field for a form
 document.addEventListener('DOMContentLoaded', () => {
     // Select all forms with the 'formjson' attribute
     const forms = document.querySelectorAll('form[formjson]');
 
     // Add an event listener for 'submit' to each form
     forms.forEach(form => {
+        // Add submit event listener
         form.addEventListener('submit', formListener);
     });
 });
